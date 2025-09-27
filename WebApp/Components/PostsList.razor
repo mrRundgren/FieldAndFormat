@@ -1,11 +1,10 @@
 @using System.Globalization
 @using BlazorStatic
 @using BlazorStatic.Services
-@inject BlazorStaticContentService<BlogFrontMatter> blazorStaticContentService
-@inject BlazorStaticService blazorStaticService
+@inject BlazorStaticContentService<BlogFrontMatter> BlazorStaticContentService
 
 <ul class="divide-y   divide-gray-700">
-    @foreach (var post in posts.OrderByDescending(x => x.FrontMatter.Published))
+    @foreach (var post in _posts.OrderByDescending(x => x.FrontMatter.Published))
     {
         <li class="py-12">
             <article>
@@ -14,7 +13,8 @@
                         <dt class="sr-only">Published on</dt>
                         <dd class="text-base font-medium leading-6 text-gray-400">
 
-                            <time datetime="@post.FrontMatter.Published.ToString("yyyy-MM-ddTHH:mm:ss.fffK", CultureInfo.InvariantCulture)">
+                            <time
+                                datetime="@post.FrontMatter.Published.ToString("yyyy-MM-ddTHH:mm:ss.fffK", CultureInfo.InvariantCulture)">
                                 @post.FrontMatter.Published.ToString("MMMM d, yyyy", new CultureInfo("en-US"))
                             </time>
 
@@ -24,12 +24,14 @@
                         <div class="space-y-6">
                             <div>
                                 <h2 class="text-2xl font-bold leading-8 tracking-tight">
-                                    <a class="text-gray-100" href="@blazorStaticContentService.Options.PageUrl/@(post.Url)">@post.FrontMatter.Title</a>
+                                    <a class="text-gray-100"
+                                       href="@BlazorStaticContentService.Options.PageUrl/@(post.Url)">@post.FrontMatter.Title</a>
                                 </h2>
                                 <div class="flex flex-wrap">
                                     @foreach (var tag in post.FrontMatter.Tags)
                                     {
-                                        <a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase" href="@blazorStaticContentService.Options.Tags.TagsPageUrl/@tag">@tag</a>
+                                        <a class="text-primary-500 hover:text-primary-400 mr-3 text-sm font-medium uppercase"
+                                           href="@BlazorStaticContentService.Options.Tags.TagsPageUrl/@tag">@tag</a>
                                     }
                                 </div>
                             </div>
@@ -38,7 +40,9 @@
                             </div>
                         </div>
                         <div class="text-base font-medium leading-6">
-                            <a class="text-primary-500 hover:text-primary-400" aria-label='Read "@(post.FrontMatter.Lead)"' href="@blazorStaticContentService.Options.PageUrl/@(post.Url)">Read more →</a>
+                            <a class="text-primary-500 hover:text-primary-400"
+                               aria-label='Read "@(post.FrontMatter.Lead)"'
+                               href="@BlazorStaticContentService.Options.PageUrl/@(post.Url)">Read more →</a>
                         </div>
                     </div>
                 </div>
@@ -49,14 +53,16 @@
 
 
 @code {
-    List<Post<BlogFrontMatter>> posts = new();
+    List<Post<BlogFrontMatter>> _posts = [];
 
-
-    [Parameter] public List<Post<BlogFrontMatter>>? Posts { get; set; }
+    [Parameter]
+    public List<Post<BlogFrontMatter>>? Posts { get; set; }
 
     protected override void OnInitialized()
     {
-        posts = Posts != null ? Posts.OrderBy(x => x.FrontMatter.Published).ToList() : blazorStaticContentService.Posts;
+        _posts = Posts != null
+            ? Posts.OrderBy(x => x.FrontMatter.Published).ToList()
+            : BlazorStaticContentService.Posts;
         base.OnInitialized();
     }
 
