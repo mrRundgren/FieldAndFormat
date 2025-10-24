@@ -2,7 +2,7 @@
 @page "/tags"
 @using BlazorStatic
 @using BlazorStatic.Services
-@inject BlazorStaticContentService<BlogFrontMatter> BlazorStaticContentService
+@inject BlazorStaticContentService<PageFrontMatter> BlazorStaticContentService
 
 @if (TagName == null)
 {
@@ -32,14 +32,14 @@
             <span class="text-primary-300">@TagName</span>
         </p>
     </div>
-    <PostsList Posts="_posts"/>
+    <Assignments Posts="_posts"/>
 </div>
 
 @code {
 
     [Parameter] public string? TagName { get; set; }
 
-    List<Post<BlogFrontMatter>>? _posts;
+    List<Post<PageFrontMatter>>? _posts;
 
     protected override void OnInitialized()
     {

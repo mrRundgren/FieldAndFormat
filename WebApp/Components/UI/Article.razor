@@ -1,0 +1,12 @@
+﻿@using BlazorStatic
+@using WebApp.Extensions
+
+<article>
+    @Post.HtmlContent.ToMarkupString()
+</article>
+
+@code
+{
+    [Parameter]
+    public required Post<PageFrontMatter> Post { get; set; }
+}

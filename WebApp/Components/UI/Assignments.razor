@@ -1,0 +1,36 @@
+@using System.Globalization
+@using BlazorStatic
+@using BlazorStatic.Services
+@inject BlazorStaticContentService<PageFrontMatter> BlazorStaticContentService
+
+<ul>
+    @foreach (Post<PageFrontMatter> post in _posts.OrderByDescending(x => x.FrontMatter.Created))
+    {
+        <li>
+            <article>
+                <time datetime="@post.FrontMatter.Created.ToString(CultureInfo.CurrentUICulture)">
+                    @post.FrontMatter.Created.ToString(CultureInfo.CurrentUICulture)
+                </time>
+                <a href="@BlazorStaticContentService.Options.PageUrl/@(post.Url)">@post.FrontMatter.Title</a>
+            </article>
+        </li>
+    }
+</ul>
+
+
+@code {
+    List<Post<PageFrontMatter>> _posts = [];
+
+    [Parameter]
+    public List<Post<PageFrontMatter>>? Posts { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _posts = Posts != null
+            ? Posts.OrderBy(x => x.FrontMatter.Created).ToList()
+            : BlazorStaticContentService.Posts.Where(x =>
+                !x.FrontMatter.Tags.Contains(Constants.AssignmentTag)).ToList();
+        base.OnInitialized();
+    }
+
+}

@@ -1,30 +1,27 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Various things and other stuff"/>
     <base href="/"/>
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-
-                    colors: {
-                        primary: tailwind.colors.violet
-                    },
-                },
-            },
-        }
-    </script>
-
-
+    <link rel="stylesheet" href="css/format.css"/>
     <HeadOutlet/>
 </head>
-
-<body class="bg-gray-950 font-sans text-gray-200">
+<body>
 <Routes/>
-</body>
+<script type="module" defer>
+    window.nav = {
+        open: () => document.body.classList.add('nav-open'),
+        close: () => document.body.classList.remove('nav-open'),
+        toggle: () => document.body.classList.toggle('nav-open')
+    }
 
+    document.body.addEventListener('click', (event) => {
+        if (event.target.closest('nav') === null && event.target.closest('button') === null) {
+            window.nav.close();
+        }
+    });
+</script>
+</body>
 </html>

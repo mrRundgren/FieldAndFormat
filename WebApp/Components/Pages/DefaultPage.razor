@@ -1,0 +1,48 @@
+﻿@page "/"
+@page "/pages/{fileName}"
+@using BlazorStatic
+
+<PageTitle>@Constants.PageTitle - @_post?.FrontMatter.Title</PageTitle>
+
+@if (_post is null)
+{
+    <article>
+        <h1>Innehåll saknas</h1>
+        <p>
+            Tyvärr kunde vi inte hitta sidan du letade efter.
+            Vänligen kontrollera URL:en eller gå tillbaka till
+            <a href="/">startsidan</a>.
+        </p>
+    </article>
+    return;
+}
+
+@if (_post.FrontMatter.Hero is not null)
+{
+    <figure class="hero">
+        <figcaption>
+            <span>@_post.FrontMatter.Hero["text"]</span>
+        </figcaption>
+        <img src="@_post.FrontMatter.Hero["image"]" alt="hero" class="hero-image"/>
+    </figure>
+}
+
+<Article Post="_post"/>
+
+@code{
+
+    [CascadingParameter(Name = "Posts")]
+    public List<Post<PageFrontMatter>> Posts { get; set; } = [];
+
+    [Parameter]
+    public string? FileName { get; set; }
+
+    private Post<PageFrontMatter>? _post;
+
+    protected override void OnInitialized()
+    {
+        var pageUrl = FileName ?? Constants.StartPageUrl;
+        _post = Posts.FirstOrDefault(x => x.Url == pageUrl);
+    }
+
+}

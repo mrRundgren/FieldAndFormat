@@ -1,26 +1,52 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PackageId>WebApp</PackageId>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="BlazorStatic" Version="1.0.0-beta.14"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BlazorStatic" Version="1.0.0-beta.14"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <None Update="Content/**/*">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
+  <ItemGroup>
+    <None Update="Content/**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\contact-information.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\start-page.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\services.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\reference-projects.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\methods-and-ethics.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 
-    <!-- to make hot reload work on .md files -->
-    <ItemGroup>
-        <Watch Include="Content/**/*"/>
-    </ItemGroup>
+  <!-- to make hot reload work on .md files -->
+  <ItemGroup>
+    <Watch Include="Content/**/*"/>
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\content\media\1704876001138.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\content\media\logo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Content\media\1704876001138.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
 
 </Project>
