@@ -61,5 +61,5 @@ app
     .UseAntiforgery();
 
 app.MapRazorComponents<App>();
-app.UseBlazorStaticGenerator(!app.Environment.IsDevelopment());
+app.UseBlazorStaticGenerator(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production");
 app.Run();
