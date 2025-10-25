@@ -1,11 +1,15 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="sv-SE">
 <head>
+    <base href="/"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Various things and other stuff"/>
-    <base href="/"/>
+    <meta name="theme-color" content="#0a74da"/>
+    <link rel="preload" fetchpriority="high" as="style" href="css/format.css" type="text/css"/>
+    <link rel="preconnect" href="manifest.json" type="json">
     <link rel="stylesheet" href="css/format.css"/>
+    <link rel="manifest" href="manifest.json"/>
     <HeadOutlet/>
 </head>
 <body>
@@ -22,6 +26,72 @@
             window.nav.close();
         }
     });
+
+    if ('serviceWorker' in navigator) {
+        let swRegistration = null;
+
+        navigator.serviceWorker.register('/service-worker.js').then(reg => {
+            swRegistration = reg;
+
+            // If there's already a waiting worker, notify page immediately
+            if (reg.waiting) {
+                notifyUpdate(reg);
+            }
+
+            // Listen for new service worker being installed
+            reg.addEventListener('updatefound', () => {
+                const installing = reg.installing;
+                if (!installing) return;
+                installing.addEventListener('statechange', () => {
+                    if (installing.state === 'installed') {
+                        // If there's an existing controller, this is an update -> notify UI
+                        if (navigator.serviceWorker.controller) {
+                            notifyUpdate(reg);
+                        } else {
+                            // first install - nothing to do
+                        }
+                    }
+                });
+            });
+        }).catch(err => {
+            // registration failed - optional logging
+            console.error('SW registration failed:', err);
+        });
+
+        // When the new SW activates and becomes controlling, reload once to use new assets
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (refreshing) return;
+            refreshing = true;
+            window.location.reload();
+        });
+
+        // Listen for messages from SW (e.g. NEW_VERSION_ACTIVATED)
+        navigator.serviceWorker.addEventListener('message', event => {
+            if (!event.data) return;
+            if (event.data.type === 'NEW_VERSION_ACTIVATED') {
+                // Activated - ensure we refresh (controllerchange may already do this)
+                window.location.reload();
+            }
+        });
+
+        function notifyUpdate(registration) {
+            const evt = new CustomEvent('swUpdated', { detail: { registration } });
+            window.dispatchEvent(evt);
+        }
+
+        // Expose helper for UI to tell the waiting SW to skip waiting and activate
+        window.updateServiceWorker = function() {
+            if (!swRegistration) return;
+            if (swRegistration.waiting) {
+                // Send a message to the waiting SW to skipWaiting
+                swRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
+            } else {
+                // No waiting worker (maybe update not detected) - try to update registration
+                swRegistration.update();
+            }
+        };
+    }
 </script>
 </body>
 </html>

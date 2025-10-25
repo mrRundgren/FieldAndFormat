@@ -1,0 +1,27 @@
+﻿{
+  "id": "/",
+  "start_url": "/pages/start-page.html",
+  "theme_color": "#9eb703",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "images/icons/icon512_maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "images/icons/icon512_rounded.png",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "any",
+  "display_override": ["fullscreen", "minimal-ui"],
+  "display": "standalone",
+  "dir": "ltr",
+  "lang": "sv-SE",
+  "name": "Fält & Format",
+  "short_name": "Fält & Format"
+}

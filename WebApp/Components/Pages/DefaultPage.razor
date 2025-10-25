@@ -19,6 +19,9 @@
 
 @if (_post.FrontMatter.Hero is not null)
 {
+    <HeadContent>
+        <link rel="preload" fetchpriority="high" as="image" href="@_post.FrontMatter.Hero["image"]"/>
+    </HeadContent>
     <figure class="hero">
         <figcaption>
             <span>@_post.FrontMatter.Hero["text"]</span>

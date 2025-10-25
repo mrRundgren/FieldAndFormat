@@ -4,7 +4,7 @@ created: 2025-10-06
 isStartPage: true
 hero:
       text: "Etnografisk research & textproduktion"
-      image: "content/media/1704876001138.jpg"
+      image: "content/media/1704876001138.webp"
 ---
 
 # Varför Etnografi?
