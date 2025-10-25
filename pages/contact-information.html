@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="sv-SE"><head><base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Various things and other stuff">
+    <meta name="theme-color" content="#0a74da">
+    <link rel="preload" fetchpriority="high" as="style" href="css/format.css" type="text/css">
+    <link rel="preconnect" href="manifest.json" type="json">
+    <link rel="stylesheet" href="css/format.css">
+    <link rel="manifest" href="manifest.json">
+    <title>F&#xE4;lt &amp; Format - Kontaktinformation</title></head>
+<body><header><section><brand><a href="/"><svg width="180" height="100" role="img" style="margin-bottom: -5px" preserveAspectRatio="xMinYMin meet" aria-label="Fält & Format logotyp" viewBox="0 0 90 50" xmlns="http://www.w3.org/2000/svg"><style type="text/css">
+        text {
+            fill: var(--color-text, #434343);
+            font-family: "Garamond Local", serif;
+            user-select: none;
+        }
+
+        .letter-f {
+            font-size: 32px;
+        }
+
+        .field {
+            font-size: 28px;
+        }
+
+        .and {
+            font-size: 42px;
+            fill: var(--color-brand, #9eb503);
+            font-family: "Playfair Local", serif;
+        }
+
+        .format {
+            font-size: 28px;
+        }
+    </style>
+    <text x="13.25" y="27.25" class="letter-f">F</text>
+    <text x="27.25" y="27.25" class="field">ält</text>
+    <text x="51" y="35" class="and">&amp;</text>
+    <text x="3.5" y="43" class="letter-f">F</text>
+    <text x="18" y="43" class="format">ormat</text></svg></a></brand>
+        <button onclick="window.nav.open();" aria-label="Open menu button"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"></path></svg></button></section></header>
+<nav><section><header><brand><a href="/"><svg width="180" height="100" role="img" style="margin-bottom: -5px" preserveAspectRatio="xMinYMin meet" aria-label="Fält & Format logotyp" viewBox="0 0 90 50" xmlns="http://www.w3.org/2000/svg"><style type="text/css">
+        text {
+            fill: var(--color-text, #434343);
+            font-family: "Garamond Local", serif;
+            user-select: none;
+        }
+
+        .letter-f {
+            font-size: 32px;
+        }
+
+        .field {
+            font-size: 28px;
+        }
+
+        .and {
+            font-size: 42px;
+            fill: var(--color-brand, #9eb503);
+            font-family: "Playfair Local", serif;
+        }
+
+        .format {
+            font-size: 28px;
+        }
+    </style>
+    <text x="13.25" y="27.25" class="letter-f">F</text>
+    <text x="27.25" y="27.25" class="field">ält</text>
+    <text x="51" y="35" class="and">&amp;</text>
+    <text x="3.5" y="43" class="letter-f">F</text>
+    <text x="18" y="43" class="format">ormat</text></svg></a></brand>
+            <button onclick="window.nav.close();" aria-label="Close menu button"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"></path></svg></button></header>
+        <menu><li><a href="pages/services">Tj&#xE4;nster</a></li><li><a href="pages/methods-and-ethics">Metoder &amp; etik</a></li><li><a href="pages/reference-projects">Referensprojekt</a></li><li><a href="pages/contact-information" class="active" aria-current="page">Kontaktinformation</a></li></menu></section></nav>
+<main><article><h1 id="kontaktinformation">Kontaktinformation</h1>
+<p>Här kan du inkludera din kontaktinformation, såsom e-postadress, telefonnummer, och eventuellt ett kontaktformulär. Du kan också inkludera länkar till dina sociala medieprofiler om det är
+relevant.</p>
+</article></main>
+<footer><address></address></footer>
+<script type="module" defer>
+    window.nav = {
+        open: () => document.body.classList.add('nav-open'),
+        close: () => document.body.classList.remove('nav-open'),
+        toggle: () => document.body.classList.toggle('nav-open')
+    }
+
+    document.body.addEventListener('click', (event) => {
+        if (event.target.closest('nav') === null && event.target.closest('button') === null) {
+            window.nav.close();
+        }
+    });
+
+    if ('serviceWorker' in navigator) {
+        let swRegistration = null;
+
+        navigator.serviceWorker.register('/service-worker.js').then(reg => {
+            swRegistration = reg;
+
+            // If there's already a waiting worker, notify page immediately
+            if (reg.waiting) {
+                notifyUpdate(reg);
+            }
+
+            // Listen for new service worker being installed
+            reg.addEventListener('updatefound', () => {
+                const installing = reg.installing;
+                if (!installing) return;
+                installing.addEventListener('statechange', () => {
+                    if (installing.state === 'installed') {
+                        // If there's an existing controller, this is an update -> notify UI
+                        if (navigator.serviceWorker.controller) {
+                            notifyUpdate(reg);
+                        } else {
+                            // first install - nothing to do
+                        }
+                    }
+                });
+            });
+        }).catch(err => {
+            // registration failed - optional logging
+            console.error('SW registration failed:', err);
+        });
+
+        // When the new SW activates and becomes controlling, reload once to use new assets
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (refreshing) return;
+            refreshing = true;
+            window.location.reload();
+        });
+
+        // Listen for messages from SW (e.g. NEW_VERSION_ACTIVATED)
+        navigator.serviceWorker.addEventListener('message', event => {
+            if (!event.data) return;
+            if (event.data.type === 'NEW_VERSION_ACTIVATED') {
+                // Activated - ensure we refresh (controllerchange may already do this)
+                window.location.reload();
+            }
+        });
+
+        function notifyUpdate(registration) {
+            const evt = new CustomEvent('swUpdated', { detail: { registration } });
+            window.dispatchEvent(evt);
+        }
+
+        // Expose helper for UI to tell the waiting SW to skip waiting and activate
+        window.updateServiceWorker = function() {
+            if (!swRegistration) return;
+            if (swRegistration.waiting) {
+                // Send a message to the waiting SW to skipWaiting
+                swRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
+            } else {
+                // No waiting worker (maybe update not detected) - try to update registration
+                swRegistration.update();
+            }
+        };
+    }
+</script></body></html>
