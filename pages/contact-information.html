@@ -92,7 +92,7 @@ relevant.</p>
     if ('serviceWorker' in navigator) {
         let swRegistration = null;
 
-        navigator.serviceWorker.register('/service-worker.js').then(reg => {
+        navigator.serviceWorker.register('service-worker.js').then(reg => {
             swRegistration = reg;
 
             // If there's already a waiting worker, notify page immediately
