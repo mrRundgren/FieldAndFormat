@@ -23,7 +23,7 @@ builder.Services
     .AddBlazorStaticService()
     .AddBlazorStaticContentService<PageFrontMatter>(options =>
     {
-        options.ContentPath = "Content";
+        options.ContentPath = "content";
         options.PageUrl = "pages";
         options.Tags.TagsPageUrl = "tags";
     })

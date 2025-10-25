@@ -14,14 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Content/**/*">
+    <None Update="content/**/*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   
   <!-- to make hot reload work on .md files -->
   <ItemGroup>
-    <Watch Include="Content/**/*"/>
+    <Watch Include="content/**/*"/>
   </ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="output\manifest.json" />
