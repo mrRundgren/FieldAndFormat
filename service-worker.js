@@ -1,12 +1,11 @@
 ﻿const CACHE_NAME = 'app-v1';
 const PRECACHE_URLS = [
-    '/', // ensure navigations can fallback
-    '/css/format.css',
-    '/fonts/EBGaramond-VariableFont_wght.woff',
-    '/fonts/NotoSansGeorgian-VariableFont.woff',
-    '/fonts/PlayfairDisplay-VariableFont_wght.woff',
-    '/images/icons/icon512_maskable.png',
-    '/images/icons/icon512_rounded.png',
+    'css/format.css',
+    'fonts/EBGaramond-VariableFont_wght.woff',
+    'fonts/NotoSansGeorgian-VariableFont.woff',
+    'fonts/PlayfairDisplay-VariableFont_wght.woff',
+    'images/icons/icon512_maskable.png',
+    'images/icons/icon512_rounded.png',
 ];
 
 self.addEventListener('install', event => {
