@@ -1,0 +1,16 @@
+<svg class="logo" width="180" height="100" role="img" preserveAspectRatio="xMinYMin meet" aria-label="Fält &amp; Format logotyp" viewBox="0 0 90 50" xmlns="http://www.w3.org/2000/svg"
+     style="margin-bottom: -5px">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap');
+        text { fill: var(--color-text, #434343); font-family: "EB Garamond", serif; user-select: none; }
+        .letter-f { font-size: 32px; }
+        .field { font-size: 28px; }
+        .and { font-size: 42px; fill: var(--color-brand, #9eb503); font-family: "Playfair Display", serif; }
+        .format { font-size: 28px; }
+    </style>
+    <text x="13.25" y="27.25" class="letter-f">F</text>
+    <text x="27.25" y="27.25" class="field">ält</text>
+    <text x="51" y="35" class="and">&amp;</text>
+    <text x="3.5" y="43" class="letter-f">F</text>
+    <text x="18" y="43" class="format">ormat</text>
+</svg>
