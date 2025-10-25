@@ -48,7 +48,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app
-    .UseHttpsRedirection()
     .UseResponseCompression()
     .UseWebOptimizer()
     .UseStaticFiles(new StaticFileOptions
@@ -62,5 +61,5 @@ app
     .UseAntiforgery();
 
 app.MapRazorComponents<App>();
-app.UseBlazorStaticGenerator(!app.Environment.IsDevelopment());
+app.UseBlazorStaticGenerator(true);
 app.Run();
