@@ -53,7 +53,7 @@ app
     .UseWebOptimizer()
     .UseStaticFiles(new StaticFileOptions
     {
-        FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "output")),
+        // FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "output")),
         OnPrepareResponse = ctx =>
         {
             ctx.Context.Response.Headers.Append("Cache-Control", "public, max-age=604800");
