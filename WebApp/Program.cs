@@ -23,7 +23,7 @@ builder.Services
     .AddBlazorStaticService()
     .AddBlazorStaticContentService<PageFrontMatter>(options =>
     {
-        options.ContentPath = "content";
+        options.ContentPath = "Content";
         options.PageUrl = "pages";
         options.Tags.TagsPageUrl = "tags";
     })
@@ -53,7 +53,7 @@ app
     .UseWebOptimizer()
     .UseStaticFiles(new StaticFileOptions
     {
-        //FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "output")),
+        FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "output")),
         OnPrepareResponse = ctx =>
         {
             ctx.Context.Response.Headers.Append("Cache-Control", "public, max-age=604800");
