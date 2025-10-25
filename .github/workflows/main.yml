@@ -17,10 +17,6 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 9.0.306
-      - name: Fix certs
-        run: |
-          sudo apt-get install -y ca-certificates
-          sudo update-ca-certificates
       - name: Run webapp and generate static files
         run: |
           dotnet run --project WebApp/WebApp.csproj  --configuration Release
