@@ -19,7 +19,7 @@ jobs:
           dotnet-version: 9.0.306
       - name: Run webapp and generate static files
         run: |
-          dotnet run --project WebApp/WebApp.csproj  --configuration Release
+          dotnet run --project WebApp/WebApp.csproj  --configuration Release --launch-profile http
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:

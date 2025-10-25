@@ -61,5 +61,5 @@ app
     .UseAntiforgery();
 
 app.MapRazorComponents<App>();
-app.UseBlazorStaticGenerator(true);
+app.UseBlazorStaticGenerator(!app.Environment.IsDevelopment());
 app.Run();
