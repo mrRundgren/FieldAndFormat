@@ -1,7 +1,6 @@
 using System.IO.Compression;
 using BlazorStatic;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.FileProviders;
 using WebApp;
 using WebApp.Components;
 
@@ -20,7 +19,11 @@ builder.Services
     {
         pipeline.MinifyCssFiles("css/**/*.css");
     })
-    .AddBlazorStaticService()
+    .AddBlazorStaticService(o =>
+    {
+        o.ShouldGenerateSitemap = true;
+        o.SiteUrl = builder.Configuration.GetValue<string>("SiteUrl");
+    })
     .AddBlazorStaticContentService<PageFrontMatter>(options =>
     {
         options.ContentPath = "Content";
@@ -52,7 +55,6 @@ app
     .UseWebOptimizer()
     .UseStaticFiles(new StaticFileOptions
     {
-        // FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "output")),
         OnPrepareResponse = ctx =>
         {
             ctx.Context.Response.Headers.Append("Cache-Control", "public, max-age=604800");
